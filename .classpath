@@ -6,6 +6,10 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/Users/gaut/Downloads/student.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/avime/Downloads/student.jar"/>
+>>>>>>> f5eac3a102018eafad783a84bde33ec31c5738ff
 	<classpathentry kind="output" path="bin"/>
 </classpath>
