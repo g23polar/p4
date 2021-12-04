@@ -27,9 +27,9 @@ public class MemManTest extends TestCase {
         assertNotNull(manager);
         String[] args = new String[3];
         args[0] = "1024";
-        args[1] = "100";
-//        args[2] = "src/mytest.txt";
-        args[2] = "src/sampleInput.txt";
+        args[1] = "5";
+        args[2] = "src/mytest.txt";
+//        args[2] = "src/sampleInput.txt";
 //        System.out.println("main before");
         MemMan.main(args);
 //        System.out.println("main after");

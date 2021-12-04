@@ -29,23 +29,25 @@ public class Hash {
         return this.capacity;
     }
 
-    public void insert(String val) {
-        System.out.println("inserting val = " + val);
+    public boolean insert(String val) {
 
-        if ((this.size + 1) * 2 >= this.capacity) {
+        if ((this.size) * 2 >= this.capacity) {
             /**
              * double, reinsert and add new
              */
             // System.out.println("rehash");
             this.rehash(val);
-            return;
+            this.size++;
+            return true;
         }
+        
         else {
-            // System.out.println("basic add");
-            this.basicInsert(this.table, val, this.capacity);
+            this.size++;
+             System.out.println("basic add");
+             System.out.println("val = " + val);
+             System.out.println("cap = " + this.capacity);
+            return this.basicInsert(this.table, val, this.capacity);
         }
-
-        this.size++;
 
     }
 
@@ -57,32 +59,39 @@ public class Hash {
      * @param c
      *            current capacity
      */
-    private void basicInsert(String[] t, String s, int c) {
-        if (s == null) {
-            return;
-        }
-        System.out.println("s = " + s);
-        int home = this.h(s, c + 1);
+    private boolean basicInsert(String[] t, String s, int c) {
 
+        if (s == null) {
+            return false;
+        }
+
+        int home = this.h(s, c + 1);
+        boolean inserted = false;
         if (t[home] == null) {
             t[home] = s;
+            inserted = true;
+            System.out.print("hash add > " + s);
+            System.out.println(" at " + home);
         }
         else {
-            // System.out.println("occupied");
+             System.out.println("occupied");
             while (true) {
                 // System.out.println("original is " + home);
                 home = (home * home) % c;
                 // System.out.println("Squaring is " + home);
                 if (t[home] == null) {
                     t[home] = s;
+                    inserted = true;
                     break;
                 }
             }
         }
+        System.out.println("hash add ret > " + inserted);
+        return inserted;
     }
 
     private void rehash(String addition) {
-
+        System.out.println("rehashing and adding " + addition);
         this.capacity = (2 * this.capacity);
         String[] newTable = new String[this.capacity + 1];
 
@@ -98,6 +107,7 @@ public class Hash {
 
     public void tablePrint() {
         int idx = 0;
+        System.out.println("Total records: " + this.size);
         for (String s : table) {
             if (s != null) {
                 System.out.println("|" + s + "|" + idx);
@@ -139,5 +149,18 @@ public class Hash {
         }
 
         return (int) (Math.abs(sum) % m);
+    }
+
+    public void remove(String string) {
+//        System.out.println("hash remove > " + string);
+        for (int i = 0; i < this.capacity; i++) {
+            if (string.equals(this.table[i])) {
+//                System.out.println("found > " + string);
+                this.table[i] = null;
+                this.size--;
+                break;
+            }
+        }
+
     }
 }
